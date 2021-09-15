@@ -1,6 +1,29 @@
-# wt_pokemon
+# PokeGuesser
 
-A new Flutter project.
+A recreation of a web app that I made for a college assignment (inspired by *"Who's that Pokemon?"*).
+This project is to help me learn Flutter and Dart.
+
+
+## App Views
+
+Here is what the Home view looks like. Apart from disabling landscape mode this part is pretty much complete.
+![Home](./documentation/Main Screen.png)
+
+Here is the PokeGuesser view. This still needs the button actions to reveal the pokemon, and maybe add a count of discovered pokemon somehwere.
+![PokeGuesser](./documentation/PokeGuesser.png)
+
+Here is the Pokedex view. This could probably have a placeholder image (*maybe a silhouette or a question mark*), and maybe add a count of discovered pokemon somehwere.
+![Pokedex](./documentation/Pokedex.png)
+
+
+## App View Inspiration
+
+The scene from the Pokemon Show that the whole app is based from.
+![Whos that Pokemon](./documentation/Whos That Pokemon.png)
+
+The original web application that I had made a few years ago for a college assignment, which inspired this.
+![College Application](./documentation/College Web Application.png)
+
 
 ## Getting Started
 
