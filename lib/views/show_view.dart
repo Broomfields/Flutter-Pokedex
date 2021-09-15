@@ -31,7 +31,6 @@ class _ShowViewState extends State<ShowView> {
 
   Pokemon selectedPokemon;
   List<Pokemon> selectionGroup;
-  ShaderMask pokemonShaderMask;
 
   buttonFunction(Pokemon pokemon) {
     if (pokemon != null && selectedPokemon != null) {
@@ -39,50 +38,18 @@ class _ShowViewState extends State<ShowView> {
     }
   }
 
-  revealPokemon() {
-    pokemonShaderMask = ShaderMask(
-        blendMode: BlendMode.srcATop,
-        shaderCallback: (Rect bounds) {
-          return RadialGradient(
-            colors: [],
-          ).createShader(bounds);
-        },
-        child: Container(
-          height: 320.0,
-          width: 320.0,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: NetworkImage(selectedPokemon.img))),
-        ));
-  }
-
   correctGuess() {
-    revealPokemon();
+    
   }
 
   failedGuess() {
-    revealPokemon();
+
   }
 
   @override
   void initState() {
     selectionGroup = widget.pokedex.generateWTPokemonSelection();
     selectedPokemon = selectionGroup[0];
-
-    pokemonShaderMask = ShaderMask(
-        blendMode: BlendMode.srcATop,
-        shaderCallback: (Rect bounds) {
-          return RadialGradient(
-            colors: [Color(0xfffefefe), Color(0xff5fd2c9)],
-          ).createShader(bounds);
-        },
-        child: Container(
-          height: 320.0,
-          width: 320.0,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: NetworkImage(selectedPokemon.img))),
-        ));
 
     selectionGroup.shuffle();
 
@@ -155,7 +122,21 @@ class _ShowViewState extends State<ShowView> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      pokemonShaderMask,
+                      ShaderMask(
+                          blendMode: BlendMode.srcATop,
+                          shaderCallback: (Rect bounds) {
+                            return RadialGradient(
+                              colors: [Color(0xfffefefe), Color(0xff5fd2c9)],
+                            ).createShader(bounds);
+                          },
+                          child: Container(
+                            height: 320.0,
+                            width: 320.0,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(selectedPokemon.img))),
+                          )),
                     ],
                   ),
                 ],
