@@ -38,13 +38,9 @@ class _ShowViewState extends State<ShowView> {
     }
   }
 
-  correctGuess() {
-    
-  }
+  correctGuess() {}
 
-  failedGuess() {
-
-  }
+  failedGuess() {}
 
   @override
   void initState() {
