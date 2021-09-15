@@ -7,7 +7,7 @@ This project is to help me learn Flutter and Dart.
 ## App Views
 
 Here is what the Home view looks like. Apart from disabling landscape mode this part is pretty much complete.
-![Home]("./documentation/Main Screen.png" = 250x)
+![Home]("./documentation/Main Screen.png")
 
 Here is the PokeGuesser view. This still needs the button actions to reveal the pokemon, and maybe add a count of discovered pokemon somehwere.
 ![PokeGuesser]("./documentation/PokeGuesser.png" = 250x)
