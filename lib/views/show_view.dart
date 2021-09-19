@@ -31,21 +31,38 @@ class _ShowViewState extends State<ShowView> {
 
   Pokemon selectedPokemon;
   List<Pokemon> selectionGroup;
+  PokeButton pokeButton1, pokeButton2, pokeButton3, pokeButton4;
 
-  buttonFunction(Pokemon pokemon) {
-    if (pokemon != null && selectedPokemon != null) {
-      pokemon.id == selectedPokemon.id ? correctGuess() : failedGuess();
+  buttonFunction(PokeButton button) {
+    if (button != null) {
+      Pokemon pokemon = button.getPokemon();
+      if (pokemon != null && selectedPokemon != null) {
+        pokemon.id == selectedPokemon.id
+            ? correctGuess(button)
+            : failedGuess(button);
+      }
     }
   }
 
-  correctGuess() {}
+  correctGuess(PokeButton button) {
+    //Need to figure out how to access widget items
+  }
 
-  failedGuess() {}
+  failedGuess(PokeButton button) {}
 
   @override
   void initState() {
     selectionGroup = widget.pokedex.generateWTPokemonSelection();
     selectedPokemon = selectionGroup[0];
+
+    pokeButton1 =
+        PokeButton(selectionGroup[0], selectionGroup[0].name, buttonFunction);
+    pokeButton2 =
+        PokeButton(selectionGroup[1], selectionGroup[1].name, buttonFunction);
+    pokeButton3 =
+        PokeButton(selectionGroup[2], selectionGroup[2].name, buttonFunction);
+    pokeButton4 =
+        PokeButton(selectionGroup[3], selectionGroup[3].name, buttonFunction);
 
     selectionGroup.shuffle();
 
@@ -146,17 +163,15 @@ class _ShowViewState extends State<ShowView> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      PokeButton(
-                        selectionGroup[0].name, () {},
-                        // buttonFunction(selectionGroup[0]),
-                      ),
+                      pokeButton1,
                     ],
                   ),
                   Column(
                     children: <Widget>[
                       PokeButton(
-                        selectionGroup[1].name, () {},
-                        // buttonFunction(selectionGroup[1]),
+                        selectionGroup[1],
+                        selectionGroup[1].name,
+                        buttonFunction,
                       ),
                     ],
                   ),
@@ -173,16 +188,18 @@ class _ShowViewState extends State<ShowView> {
                   Column(
                     children: <Widget>[
                       PokeButton(
-                        selectionGroup[2].name, () {},
-                        // buttonFunction(selectionGroup[2]),
+                        selectionGroup[2],
+                        selectionGroup[2].name,
+                        buttonFunction,
                       ),
                     ],
                   ),
                   Column(
                     children: <Widget>[
                       PokeButton(
-                        selectionGroup[3].name, () {},
-                        // buttonFunction(selectionGroup[3]),
+                        selectionGroup[3],
+                        selectionGroup[3].name,
+                        buttonFunction,
                       ),
                     ],
                   ),

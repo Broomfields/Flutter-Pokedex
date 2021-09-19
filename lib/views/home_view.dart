@@ -27,14 +27,14 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   Pokedex pokedex;
 
   fetchData() async {
-    String data = await DefaultAssetBundle.of(context).loadString("assets/pokedex.json");
+    String data =
+        await DefaultAssetBundle.of(context).loadString("assets/pokedex.json");
     final jsonResult = jsonDecode(data);
 
-    pokedex =  Pokedex.fromJson(jsonResult);
+    pokedex = Pokedex.fromJson(jsonResult);
     setState(() {});
   }
 
@@ -52,85 +52,85 @@ class _HomeViewState extends State<HomeView> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    
-    //(pokedex.isLoading) ? (Center(child : CircularProgressIndicator())) : 
-    return (
-      Scaffold(
-        backgroundColor: Color(0xffd71010),
 
-        appBar: PokeAppBar(pokedex, context,
-          // Here we take the value from the HomeView object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  stops: [
-                0.1,
-                0.2,
-                0.4,
-                0.5,
-                0.7,
-                0.8,
-                1
-              ],
-                  colors: [
-                Color(0xffd71010).withOpacity(0.7),
-                Color(0xffed6725).withOpacity(0.7),
-                Color(0xffe3231c).withOpacity(0.7),
-                Color(0xffd71010).withOpacity(0.7),
-                Color(0xffed6725).withOpacity(0.7),
-                Color(0xffed5553).withOpacity(0.7),
-                Color(0xffd71010).withOpacity(0.7)
-              ])),
-          child: Center(
-            // Center is a layout widget. It takes a single child and positions it
-            // in the middle of the parent.
-            child: Column(
-              // Column is also a layout widget. It takes a list of children and
-              // arranges them vertically. By default, it sizes itself to fit its
-              // children horizontally, and tries to be as tall as its parent.
-              //
-              // Invoke "debug painting" (press "p" in the console, choose the
-              // "Toggle Debug Paint" action from the Flutter Inspector in Android
-              // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-              // to see the wireframe for each widget.
-              //
-              // Column has various properties to control how it sizes itself and
-              // how it positions its children. Here we use mainAxisAlignment to
-              // center the children vertically; the main axis here is the vertical
-              // axis because Columns are vertical (the cross axis would be
-              // horizontal).
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Image(image: AssetImage("assets/title.png")),
+    //(pokedex.isLoading) ? (Center(child : CircularProgressIndicator())) :
+    return (Scaffold(
+      backgroundColor: Color(0xffd71010),
 
-                // Container(height: 15,),
+      appBar: PokeAppBar(
+        pokedex, context,
+        // Here we take the value from the HomeView object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                stops: [
+              0.1,
+              0.2,
+              0.4,
+              0.5,
+              0.7,
+              0.8,
+              1
+            ],
+                colors: [
+              Color(0xffd71010).withOpacity(0.7),
+              Color(0xffed6725).withOpacity(0.7),
+              Color(0xffe3231c).withOpacity(0.7),
+              Color(0xffd71010).withOpacity(0.7),
+              Color(0xffed6725).withOpacity(0.7),
+              Color(0xffed5553).withOpacity(0.7),
+              Color(0xffd71010).withOpacity(0.7)
+            ])),
+        child: Center(
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: Column(
+            // Column is also a layout widget. It takes a list of children and
+            // arranges them vertically. By default, it sizes itself to fit its
+            // children horizontally, and tries to be as tall as its parent.
+            //
+            // Invoke "debug painting" (press "p" in the console, choose the
+            // "Toggle Debug Paint" action from the Flutter Inspector in Android
+            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+            // to see the wireframe for each widget.
+            //
+            // Column has various properties to control how it sizes itself and
+            // how it positions its children. Here we use mainAxisAlignment to
+            // center the children vertically; the main axis here is the vertical
+            // axis because Columns are vertical (the cross axis would be
+            // horizontal).
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Image(image: AssetImage("assets/title.png")),
 
-                PokeButton(
-                  "Start",() 
-                  async {
-                    await Navigator.push(
+              // Container(height: 15,),
+
+              PokeButton(
+                null,
+                "Start",
+                () async {
+                  await Navigator.push(
                       context,
-                      PokePageRoute(ShowView(pokedex, title: "Who's That Pokemon!?"))
-                    );
-                    setState(() {});
-                    // print(notes);
-                  },
-                ),
-              ],
-            ),
+                      PokePageRoute(
+                          ShowView(pokedex, title: "Who's That Pokemon!?")));
+                  setState(() {});
+                  // print(notes);
+                },
+              ),
+            ],
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: _incrementCounter,
-        //   tooltip: 'Increment',
-        //   child: Icon(Icons.add),
-        // ), // This trailing comma makes auto-formatting nicer for build methods.
-      )
-    );
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
+    ));
   }
 }

@@ -1,21 +1,23 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:wt_pokemon/providers/pokemon_provider.dart';
 // import 'package:wt_pokemon/providers/pokemon_provider.dart';
 import 'package:wt_pokemon/views/pokemon_list_view.dart';
 
 class PokeButton extends StatelessWidget {
+  final Pokemon _pokemon;
   final String _text;
   final Function _onPressed;
 
-  PokeButton(this._text, this._onPressed);
+  PokeButton(this._pokemon, this._text, this._onPressed);
 
   final Color standardColour = Color(0xfffecb06);
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       child: Text(
-        _text,
+        _pokemon.name,
         style: TextStyle(
             color: Color(0xff355fa0),
             fontWeight: FontWeight.bold,
@@ -24,8 +26,12 @@ class PokeButton extends StatelessWidget {
       color: standardColour,
       minWidth: 170,
       height: 43,
-      onPressed: _onPressed,
+      onPressed: (_pokemon == null) ? _onPressed(_text) : _onPressed(this),
     );
+  }
+
+  getPokemon() {
+    return this._pokemon;
   }
 }
 
@@ -92,25 +98,23 @@ getRandom(int max) {
 }
 
 class PokePageRoute extends PageRouteBuilder {
-  PokePageRoute(Widget page) : super(
-    pageBuilder: (
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation) 
-      => page, transitionsBuilder: (
-        BuildContext context, 
-        Animation<double> animation, 
-        Animation<double> secondaryAnimation, Widget child) => ScaleTransition(
-          scale: Tween<double>(
-            begin: 0.0,
-            end: 1.0
-          ).animate(
-            CurvedAnimation(
-              parent: animation,
-              curve: Curves.fastOutSlowIn,
+  PokePageRoute(Widget page)
+      : super(
+          pageBuilder: (BuildContext context, Animation<double> animation,
+                  Animation<double> secondaryAnimation) =>
+              page,
+          transitionsBuilder: (BuildContext context,
+                  Animation<double> animation,
+                  Animation<double> secondaryAnimation,
+                  Widget child) =>
+              ScaleTransition(
+            scale: Tween<double>(begin: 0.0, end: 1.0).animate(
+              CurvedAnimation(
+                parent: animation,
+                curve: Curves.fastOutSlowIn,
+              ),
             ),
+            child: child,
           ),
-          child: child,
-        ),
-  );
+        );
 }
