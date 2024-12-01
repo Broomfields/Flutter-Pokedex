@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 // import 'package:wt_pokemon/providers/pokemon_provider.dart';
 import 'package:wt_pokemon/views/home_view.dart';
@@ -8,14 +7,11 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
       title: 'PokeGuesser',
       theme: ThemeData(
         // This is the theme of your application.
@@ -35,7 +31,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeView(title: "PokeGuesser"),
+      home: HomeView(key: UniqueKey(), title: "PokeGuesser"),
     );
   }
 }

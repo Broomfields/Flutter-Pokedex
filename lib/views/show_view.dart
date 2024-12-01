@@ -10,7 +10,8 @@ class ShowView extends StatefulWidget {
   final Pokedex pokedex;
   final String title;
 
-  ShowView(this.pokedex, {Key key, this.title}) : super(key: key);
+  ShowView(this.pokedex, {required Key key, required this.title})
+      : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -29,9 +30,9 @@ class _ShowViewState extends State<ShowView> {
   // int _counter = 0;
   // Pokedex pokedex = widget.pokedex;
 
-  Pokemon selectedPokemon;
-  List<Pokemon> selectionGroup;
-  PokeButton pokeButton1, pokeButton2, pokeButton3, pokeButton4;
+  late Pokemon selectedPokemon;
+  late List<Pokemon> selectionGroup;
+  late PokeButton pokeButton1, pokeButton2, pokeButton3, pokeButton4;
 
   buttonFunction(PokeButton button) {
     if (button != null) {

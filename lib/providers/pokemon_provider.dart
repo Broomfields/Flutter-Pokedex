@@ -1,11 +1,10 @@
 import 'package:wt_pokemon/widgets.dart';
 
 class Pokedex {
-
   bool isLoading = true;
-  List<Pokemon> pokemonList = new List<Pokemon>();
-  List<Pokemon> discoveredList = new List<Pokemon>();
-  List<Pokemon> undiscoveredList = new List<Pokemon>();
+  List<Pokemon> pokemonList = new List<Pokemon>.empty();
+  List<Pokemon> discoveredList = new List<Pokemon>.empty();
+  List<Pokemon> undiscoveredList = new List<Pokemon>.empty();
 
   //Constructor (Reads from JSON)
   Pokedex.fromJson(Map<String, dynamic> json) {
@@ -13,7 +12,9 @@ class Pokedex {
       json["pokemon"].forEach((temp) {
         Pokemon pokemon = new Pokemon.fromJson(temp);
         pokemonList.add(pokemon);
-        (pokemon.discovered == true) ? discoveredList.add(pokemon) : undiscoveredList.add(pokemon);
+        (pokemon.discovered == true)
+            ? discoveredList.add(pokemon)
+            : undiscoveredList.add(pokemon);
       });
 
       isLoading = false;
@@ -23,14 +24,12 @@ class Pokedex {
   //Writes to JSON
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.pokemonList != null) {
-      data["pokemonList"] = this.pokemonList.map((v) => v.toJson()).toList();
-    }
+    data["pokemonList"] = this.pokemonList.map((v) => v.toJson()).toList();
     return data;
   }
 
   discover(Pokemon pokemon) {
-    if(!pokemon.discovered) {
+    if (!pokemon.discovered) {
       pokemon.discovered = true;
       undiscoveredList.remove(pokemon);
       discoveredList.add(pokemon);
@@ -38,7 +37,7 @@ class Pokedex {
   }
 
   undiscover(Pokemon pokemon) {
-    if(pokemon.discovered) {
+    if (pokemon.discovered) {
       pokemon.discovered = false;
       undiscoveredList.add(pokemon);
       discoveredList.remove(pokemon);
@@ -46,33 +45,31 @@ class Pokedex {
   }
 
   List<Pokemon> generateWTPokemonSelection() {
-    
-    List<Pokemon> retList = new List<Pokemon>();
-    
+    List<Pokemon> retList = new List<Pokemon>.empty();
+
     //Gets 1 random (undiscovered pokemon) (always index 0)
-    if(undiscoveredList.length > 0) {
+    if (undiscoveredList.length > 0) {
       retList.add(undiscoveredList[getRandom(undiscoveredList.length)]);
 
       //Builds list
-      while(retList.length < 4) {
+      while (retList.length < 4) {
         Pokemon potentialPoke = pokemonList[getRandom(pokemonList.length)];
-        
+
         //Checks if pokemon isn't already in the list
         bool addPoke = true;
-        for(int index = 0; index < retList.length; index++) { 
+        for (int index = 0; index < retList.length; index++) {
           Pokemon poke = retList[index];
 
-          if(poke.id == potentialPoke.id) {
+          if (poke.id == potentialPoke.id) {
             addPoke = false;
             break;
-          } 
+          }
         }
 
         //If not in list: adds to list
-        if(addPoke) {
+        if (addPoke) {
           retList.add(potentialPoke);
         }
-
       }
     }
 
@@ -81,45 +78,44 @@ class Pokedex {
 }
 
 class Pokemon {
-
   //Properties
-  int id;
-  String num;
-  String name;
-  bool discovered;
-  String img;
-  List<String> type;
-  String height;
-  String weight;
-  String candy;
-  int candyCount;
-  String egg;
-  String spawnChance;
-  String avgSpawns;
-  String spawnTime;
-  List<double> multipliers;
-  List<String> weaknesses;
-  List<NextEvolution> nextEvolution;
+  late int id;
+  late String num;
+  late String name;
+  late bool discovered;
+  late String img;
+  late List<String> type;
+  late String height;
+  late String weight;
+  late String candy;
+  late int candyCount;
+  late String egg;
+  late String spawnChance;
+  late String avgSpawns;
+  late String spawnTime;
+  late List<double> multipliers;
+  late List<String> weaknesses;
+  late List<NextEvolution> nextEvolution;
 
   //Constructor
-  Pokemon({
-      this.id,
-      this.num,
-      this.name,
-      this.discovered,
-      this.img,
-      this.type,
-      this.height,
-      this.weight,
-      this.candy,
-      this.candyCount,
-      this.egg,
-      this.spawnChance,
-      this.avgSpawns,
-      this.spawnTime,
-      this.multipliers,
-      this.weaknesses,
-      this.nextEvolution});
+  Pokemon(
+      {required this.id,
+      required this.num,
+      required this.name,
+      required this.discovered,
+      required this.img,
+      required this.type,
+      required this.height,
+      required this.weight,
+      required this.candy,
+      required this.candyCount,
+      required this.egg,
+      required this.spawnChance,
+      required this.avgSpawns,
+      required this.spawnTime,
+      required this.multipliers,
+      required this.weaknesses,
+      required this.nextEvolution});
 
   Pokemon.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -139,7 +135,7 @@ class Pokemon {
     multipliers = json["multipliers"]?.cast<double>();
     weaknesses = json["weaknesses"].cast<String>();
     if (json["next_evolution"] != null) {
-      nextEvolution = new List<NextEvolution>();
+      nextEvolution = new List<NextEvolution>.empty();
       json["next_evolution"].forEach((v) {
         nextEvolution.add(new NextEvolution.fromJson(v));
       });
@@ -163,19 +159,16 @@ class Pokemon {
     data["spawn_time"] = this.spawnTime;
     data["multipliers"] = this.multipliers;
     data["weaknesses"] = this.weaknesses;
-    if (this.nextEvolution != null) {
-      data["next_evolution"] =
-          this.nextEvolution.map((v) => v.toJson()).toList();
-    }
+    data["next_evolution"] = this.nextEvolution.map((v) => v.toJson()).toList();
     return data;
   }
 }
 
 class NextEvolution {
-  String num;
-  String name;
+  late String num;
+  late String name;
 
-  NextEvolution({this.num, this.name});
+  NextEvolution({required this.num, required this.name});
 
   NextEvolution.fromJson(Map<String, dynamic> json) {
     num = json["num"];

@@ -20,14 +20,14 @@ class HomeView extends StatefulWidget {
 
   // final Pokedex pokedex;
   final String title;
-  HomeView({Key key, this.title}) : super(key: key);
+  HomeView({required Key key, required this.title}) : super(key: key);
 
   @override
   _HomeViewState createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  Pokedex pokedex;
+  late Pokedex pokedex;
 
   fetchData() async {
     String data =
@@ -58,6 +58,7 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: Color(0xffd71010),
 
       appBar: PokeAppBar(
+        key: UniqueKey(),
         pokedex, context,
         // Here we take the value from the HomeView object that was created by
         // the App.build method, and use it to set our appbar title.
@@ -111,13 +112,13 @@ class _HomeViewState extends State<HomeView> {
               // Container(height: 15,),
 
               PokeButton(
-                null,
+                pokedex.pokemonList.first,
                 "Start",
                 () async {
                   await Navigator.push(
                       context,
-                      PokePageRoute(
-                          ShowView(pokedex, title: "Who's That Pokemon!?")));
+                      PokePageRoute(ShowView(pokedex,
+                          key: UniqueKey(), title: "Who's That Pokemon!?")));
                   setState(() {});
                   // print(notes);
                 },

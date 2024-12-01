@@ -36,7 +36,7 @@ class PokeButton extends StatelessWidget {
 }
 
 class PokeAppBar extends AppBar {
-  PokeAppBar(pokedex, context, {Key key, Widget title})
+  PokeAppBar(pokedex, context, {required Key key, required Widget title})
       : super(key: key, title: title, actions: <Widget>[
           new IconButton(
             icon: new Image.asset("assets/pokedex.jpg"),
@@ -44,8 +44,8 @@ class PokeAppBar extends AppBar {
               await Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          PokemonListView(pokedex, title: "Pokedex")));
+                      builder: (context) => PokemonListView(pokedex,
+                          key: UniqueKey(), title: "Pokedex")));
               // print(notes);
             },
           )
@@ -91,10 +91,8 @@ class PokeText extends StatelessWidget {
 }
 
 getRandom(int max) {
-  if (max != null) {
-    final _random = new Random();
-    return (_random.nextInt(max));
-  }
+  final _random = new Random();
+  return (_random.nextInt(max));
 }
 
 class PokePageRoute extends PageRouteBuilder {
